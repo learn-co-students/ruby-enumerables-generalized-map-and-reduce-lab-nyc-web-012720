@@ -12,18 +12,19 @@ def map(array)
 end
 
 
-def reduce(array, result = 0)
-  counter = 0 
-  
-  while counter < array.length do
-    if array[counter] == true
-      result = true
-    elsif array[counter] == false
-      result = false
-    else
-      result = yield(result, array[counter]) 
-    end 
-    counter += 1
+def reduce(array, starting_value = nil)
+
+  if starting_value
+    i = 0 
+    result = starting_value
+  else
+    result = array[0]
+    i = 1 
+  end
+     
+  while i < array.length do
+    result = yield(result, array[i]) 
+    i += 1
   end
   result
 end
